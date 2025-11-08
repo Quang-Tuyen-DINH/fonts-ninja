@@ -1,0 +1,69 @@
+{
+  "families": [
+    {
+      "idFont": 538481,
+      "url": "/font/newglyph-Amazonia-Ultra-Expanded-Contrast-538481",
+      "price": null,
+      "idFamily": "Newglyph-AmazoniaUltraExpandedContrast",
+      "name": "Amazonia Ultra Expanded Contrast",
+      "totalFonts": 9,
+      "foundry": {
+        "id": "Newglyph",
+        "name": "newglyph",
+        "totalFamilies": 103
+      },
+      "images": {
+        "alphabet": {
+          "svg": "<svg width=\"366\" height=\"212\" viewBox=\"0 0 366 212\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect fill=\"transparent\" width=\"366\" height=\"212\" />\n    <g fill=\"#121212\" stroke=\"#121212\" stroke-width=\"0\">\n      <g transform=\"scale(0.299 -0.299)\" >\n      <g transform=\"translate(-8 -700)\"><path d=\"M8 0L266 700L428 700L685 0L540 0L481 161L206 161L148 0ZM243 273L444 273L343 556Z\"/></g>\n      <g transform=\"translate(672 -700)\"><path d=\"M222 -6Q166 -6 123 11.5Q80 29 55.5 63Q31 97 31 144Q31 225 89 268.5Q147 312 259 312L373 312L373 340Q373 380 347 401.5Q321 423 271 423Q227 423 200 405Q173 387 167 356L44 356Q49 406 79 442Q109 478 159.5 498.5Q210 519 277 519Q382 519 440.5 471.5Q499 424 499 332L499 141Q499 121 506.5 114.5Q514 108 531 108L550 108L550 0L484 0Q433 0 411.5 22Q390 44 390 78L390 81Q373 55 349.5 35.5Q326 16 294.5 5Q263 -6 222 -6ZM243 88Q283 88 312.5 103.5Q342 119 357.5 146.5Q373 174 373 211L373 225L256 225Q209 225 184 207.5Q159 190 159 154Q159 124 181.5 106Q204 88 243 88Z\"/></g>\n     </g>\n   </g>\n</svg>",
+          "width": 366,
+          "height": 212
+        }
+      }
+    },
+    {
+      "idFont": 851778,
+      "url": "/font/Blaze-Type-Apoc-Normal-851778",
+      "price": {
+        "formatedPrice": "$92.82",
+        "amount": 92.82,
+        "currency": "$"
+      },
+      "idFamily": "BlazeType-ApocNormal",
+      "name": "Apoc Normal",
+      "totalFonts": 12,
+      "foundry": {
+        "id": "Blaze Type",
+        "name": "Blaze Type",
+        "totalFamilies": 320
+      },
+      "images": {
+        "alphabet": {
+          "svg": "<svg width=\"316\" height=\"224\" viewBox=\"0 0 316 224\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect fill=\"transparent\" width=\"316\" height=\"224\" />\n    <g fill=\"#121212\" stroke=\"#121212\" stroke-width=\"0\">\n      <g transform=\"scale(0.1495 -0.1495)\" >\n      <g transform=\"translate(-26 -1470)\"><path d=\"M26 0L232 0L360 419L868 419L997 0L1211 0L741 1470L497 1470ZM415 598L612 1244L614 1244L813 598Z\"/></g>\n      <g transform=\"translate(1198 -1470)\"><path d=\"M407 -28C547 -28 653 32 710 131C712 81 714 41 720 0L910 0C893 87 888 169 889 311L891 674C893 974 750 1073 508 1073C279 1073 125 952 118 729L318 729C321 861 383 921 506 921C627 921 692 860 692 700L692 645C318 634 75 550 75 291L75 278C75 79 212 -28 407 -28ZM698 502L698 394C698 202 595 120 462 120C351 120 283 175 283 291L283 301C283 455 425 493 698 502Z\"/></g>\n     </g>\n   </g>\n</svg>",
+          "width": 366,
+          "height": 212
+        }
+      }
+    },
+    {
+      "idFont": 517812,
+      "url": "/font/NaN-NaN-Jaune-Midi-Blond-517812",
+      "price": null,
+      "idFamily": "NaN-NaNJauneMidiBlond",
+      "name": "NaN Jaune Midi Blond",
+      "totalFonts": 1,
+      "foundry": {
+        "id": "NaN",
+        "name": "NaN",
+        "totalFamilies": 94
+      },
+      "images": {
+        "alphabet": {
+          "svg": "<svg width=\"356\" height=\"197\" viewBox=\"0 0 356 197\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect fill=\"transparent\" width=\"356\" height=\"197\" />\n    <g fill=\"#121212\" stroke=\"#121212\" stroke-width=\"0\">\n      <g transform=\"scale(0.299 -0.299)\" >\n      <g transform=\"translate(17 -643)\"><path d=\"M394 110L349 242L176 242L153 176Q121 80 123 54Q125 28 184 21L205 18L208 0L-17 0L-14 18L4 21Q51 28 70.5 54.5Q90 81 133 197L250 519L241 556Q270 563 305.5 587.5Q341 612 355 643L379 643L562 130Q586 65 606 45Q626 25 654 22L680 18L682 0L342 0L345 18L368 21Q404 24 407.5 42.5Q411 61 394 110ZM262 485L185 266L341 266L266 485Z\"/></g>\n      <g transform=\"translate(683 -643)\"><path d=\"M507 81Q485 53 449 20Q413 -13 373 -13Q336 -13 311 11.5Q286 36 281 82L278 83Q243 42 209 15Q175 -12 133 -12Q88 -12 56 17.5Q24 47 24 90Q24 148 83 188Q142 228 281 265L282 293Q284 344 257.5 379Q231 414 181 414Q153 414 140.5 407.5Q128 401 128 394Q128 389 144 371.5Q160 354 160 332Q160 309 141 291Q122 273 93 273Q66 273 46.5 287Q27 301 27 327Q27 382 109 418Q191 454 266 454Q352 454 391 415Q430 376 427 291L419 115Q417 86 427.5 73.5Q438 61 454 61Q464 61 475.5 71Q487 81 497 92ZM162 138Q162 108 177.5 90.5Q193 73 220 73Q238 73 252.5 83Q267 93 276 104L282 245Q213 227 187.5 200.5Q162 174 162 138Z\"/></g>\n     </g>\n   </g>\n</svg>",
+          "width": 356,
+          "height": 197
+        }
+      }
+    }
+  ],
+  "totalFamilies": 51
+}
