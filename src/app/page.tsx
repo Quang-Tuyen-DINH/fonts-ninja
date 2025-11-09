@@ -1,66 +1,52 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import type { FamiliesPagePayload } from '@/types/fonts';
+import { FontsList } from '@/components/FontsList';
+import { Pagination } from '@/components/Pagination';
+import { GET as familiesGET } from '@/app/api/families/route';
+import styles from './page.module.scss';
 
-export default function Home() {
+const DEFAULT_PAGE = 1;
+const DEFAULT_LIMIT = 24;
+
+export async function generateMetadata({
+  searchParams
+}: {
+  searchParams: { page?: string };
+}): Promise<Metadata> {
+  const page = Number.parseInt(searchParams?.page ?? '1', 10);
+  const safe = Number.isNaN(page) ? 1 : page;
+  return { title: `Home - Page ${safe}` };
+}
+
+async function fetchFamilies(page: number): Promise<{ families: FamiliesPagePayload['families']; totalPages: number }> {
+  try {
+    const req = new Request(`http://internal/api/families?page=${page}&perPage=${DEFAULT_LIMIT}`);
+    const res = await familiesGET(req);
+    if (res.status === 404) notFound();
+    if (!res.ok) throw new Error(`Failed to load families: ${res.status}`);
+    const json = (await res.json()) as { families: FamiliesPagePayload['families']; totalPages: number };
+    return { families: json.families, totalPages: json.totalPages };
+  } catch (err) {
+    notFound();
+  }
+}
+
+export default async function Home({ searchParams }: { searchParams?: Promise<{ page?: string }> }) {
+  const sp = await searchParams;
+  const pageRaw = await sp?.page ?? DEFAULT_PAGE.toString();
+  const page = Number.parseInt(pageRaw, 10);
+  if (Number.isNaN(page) || page < 1) notFound();
+  
+  const { families, totalPages } = await fetchFamilies(page);
+  if (page > totalPages) notFound();
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main>
+      <section className={styles.grid}>
+        <FontsList families={families} page={page} totalPages={totalPages} />
+      </section>
+      <Pagination currentPage={page} totalPages={totalPages} />
+    </main>
   );
 }
