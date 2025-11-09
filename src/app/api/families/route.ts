@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
-import { loadFamiliesPage } from '@/lib/data';
+import { loadFamiliesPage, getFamilyById } from '@/lib/data';
 
-export async function GET(req: Request) {
+const TOTAL_PAGES = 3;
+
+export async function listFamilies(req: Request) {
   const { searchParams } = new URL(req.url);
   const raw = searchParams.get('page') || '1';
   const page = Number.parseInt(raw, 10);
@@ -14,7 +16,6 @@ export async function GET(req: Request) {
     const data = await loadFamiliesPage(page);
 
     let totalFamilies = 0;
-    let totalPages = 3;
     for (let i = 1; i <= 3; i++) {
       try {
         const mod = await import(`@/data/fontFamiliesPage${i}.json`);
@@ -25,14 +26,23 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       page,
-      totalPages,
+      totalPages: TOTAL_PAGES,
       totalFamilies,
       families: data.families
     });
-  } catch (err: any) {
-    if (err.message === 'page_out_of_range') {
-      return NextResponse.json({ error: 'Page out of range' }, { status: 404 });
-    }
+  } catch (err) {
     return NextResponse.json({ error: 'Families not found' }, { status: 404 });
+  }
+}
+
+export async function getFamily(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get('id');
+  if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
+  try {
+    const family = await getFamilyById(id);
+    return NextResponse.json({ family });
+  } catch (err) {
+    return NextResponse.json({ error: 'Family not found' }, { status: 404 });
   }
 }

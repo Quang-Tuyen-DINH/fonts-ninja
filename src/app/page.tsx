@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import type { FamiliesPagePayload } from '@/types/fonts';
 import { FontsList } from '@/components/FontsList';
 import { Pagination } from '@/components/Pagination';
-import { GET as familiesGET } from '@/app/api/families/route';
+import { listFamilies } from '@/app/api/families/route';
 import styles from './page.module.scss';
 
 const DEFAULT_PAGE = 1;
@@ -22,7 +22,7 @@ export async function generateMetadata({
 async function fetchFamilies(page: number): Promise<{ families: FamiliesPagePayload['families']; totalPages: number }> {
   try {
     const req = new Request(`http://internal/api/families?page=${page}&perPage=${DEFAULT_LIMIT}`);
-    const res = await familiesGET(req);
+    const res = await listFamilies(req);
     if (res.status === 404) notFound();
     if (!res.ok) throw new Error(`Failed to load families: ${res.status}`);
     const json = (await res.json()) as { families: FamiliesPagePayload['families']; totalPages: number };

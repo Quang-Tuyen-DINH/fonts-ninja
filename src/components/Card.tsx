@@ -39,7 +39,7 @@ export function Card({ family }: CardProps) {
   }, [family.images.alphabet.svg, inView]);
 
   return (
-    <Link href={`/font/${family.idFamily}`} aria-label={`${family.foundry.name} ${family.name}`}>
+    <Link href={`/font/${family.idFont}`} aria-label={`${family.foundry.name} ${family.name}`}>
       <article className={styles.card}>
         <div
           ref={thumbRef}
