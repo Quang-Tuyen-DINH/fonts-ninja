@@ -11,7 +11,7 @@ export function FontsList({ families, page, totalPages }: FontsListProps) {
   return (
     <>
       {families.map((family) => (
-        <Card key={`${family.idFamily}-${family.idFont}`} family={family} />
+        <Card key={`${family.idFont}-${family.idFont}`} family={family} />
       ))}
     </>
   );

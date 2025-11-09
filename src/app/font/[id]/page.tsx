@@ -9,19 +9,16 @@ import PreviewSwitcher from './PreviewSwitcher';
 interface PageProps { params: Promise<{ id: string }>; }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  try {
-    const p = await params;
-    const family = await getFamilyById(p.id);
-    return family ? { title: `${family.foundry.name} ${family.name}` } : {};
-  } catch {
-    return {};
-  }
+  const p = await params;
+  const family = await getFamilyById(p.id);
+  if (!family) return {};
+  return { title: `${family.foundry.name} ${family.name}` };
 }
 
 async function fetchFontDetails(id: string): Promise<FontFamily> {
-  const fam = await getFamilyById(id);
-  if (!fam) notFound();
-  return fam;
+  const family = await getFamilyById(id);
+  if (!family) notFound();
+  return family;
 }
 
 export default async function FontDetailsPage({ params }: PageProps) {

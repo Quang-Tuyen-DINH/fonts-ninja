@@ -12,9 +12,9 @@ const DEFAULT_LIMIT = 24;
 export async function generateMetadata({
   searchParams
 }: {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 }): Promise<Metadata> {
-  const page = Number.parseInt(searchParams?.page ?? '1', 10);
+  const page = Number.parseInt((await searchParams)?.page ?? '1', 10);
   const safe = Number.isNaN(page) ? 1 : page;
   return { title: `Home - Page ${safe}` };
 }

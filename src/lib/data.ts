@@ -34,7 +34,6 @@ const buildFamiliesIndex = cache(async () => {
 });
 
 export const getFamilyById = cache(async (id: string): Promise<FamilyDetailsPayload | null> => {
-  console.log(id)
   const index = await buildFamiliesIndex();
   // return index.get(id) ?? null;
   return index.get("98223") ?? null;
