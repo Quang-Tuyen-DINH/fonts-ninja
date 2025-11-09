@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getFamilyById } from '@/lib/data';
+import { getBaseUrl } from '@/lib/url';
 import { toCurrentColor } from '@/lib/svg';
 import styles from './page.module.scss';
 import { FontFamily } from '@/types/fonts';
@@ -9,16 +9,31 @@ import PreviewSwitcher from './PreviewSwitcher';
 interface PageProps { params: Promise<{ id: string }>; }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const p = await params;
-  const family = await getFamilyById(p.id);
-  if (!family) return {};
-  return { title: `${family.foundry.name} ${family.name}` };
+  try {
+    const base = await getBaseUrl();
+    const res = await fetch(`${base}/api/familyDetails`, { cache: 'no-store' });
+    if (!res.ok) return {};
+    const family = (await res.json()) as FontFamily;
+    return { title: `${family.foundry.name} ${family.name}` };
+  } catch {
+    return {};
+  }
 }
 
 async function fetchFontDetails(id: string): Promise<FontFamily> {
-  const family = await getFamilyById(id);
-  if (!family) notFound();
-  return family;
+  try {
+    const base = await getBaseUrl();
+    const res = await fetch(`${base}/api/familyDetails`, { cache: 'no-store' });
+    if (res.status === 404) notFound();
+    if (!res.ok) throw new Error(`Failed to load family details: ${res.status}`);
+    try {
+      return (await res.json()) as FontFamily;
+    } catch (parseErr) {
+      throw new Error('Invalid JSON from /api/familyDetails');
+    }
+  } catch (err) {
+    notFound();
+  }
 }
 
 export default async function FontDetailsPage({ params }: PageProps) {

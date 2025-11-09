@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import type { FamiliesPagePayload } from '@/types/fonts';
 import { FontsList } from '@/components/FontsList';
 import { Pagination } from '@/components/Pagination';
-import { listFamilies } from '@/app/api/families/route';
+import { getBaseUrl } from '@/lib/url';
 import styles from './page.module.scss';
 
 const DEFAULT_PAGE = 1;
@@ -12,29 +12,34 @@ const DEFAULT_LIMIT = 24;
 export async function generateMetadata({
   searchParams
 }: {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: { page?: string };
 }): Promise<Metadata> {
-  const page = Number.parseInt((await searchParams)?.page ?? '1', 10);
+  const page = Number.parseInt(searchParams?.page ?? '1', 10);
   const safe = Number.isNaN(page) ? 1 : page;
   return { title: `Home - Page ${safe}` };
 }
 
 async function fetchFamilies(page: number): Promise<{ families: FamiliesPagePayload['families']; totalPages: number }> {
+  const base = await getBaseUrl();
+  const url = `${base}/api/families?page=${page}`;
+  let res: Response;
   try {
-    const req = new Request(`http://internal/api/families?page=${page}&perPage=${DEFAULT_LIMIT}`);
-    const res = await listFamilies(req);
-    if (res.status === 404) notFound();
-    if (!res.ok) throw new Error(`Failed to load families: ${res.status}`);
+    res = await fetch(url, { cache: 'no-store' });
+  } catch (networkErr) {
+    throw new Error(`Network error fetching families: ${(networkErr as Error).message}`);
+  }
+  if (res.status === 404) notFound();
+  if (!res.ok) throw new Error(`Failed to load families: ${res.status}`);
+  try {
     const json = (await res.json()) as { families: FamiliesPagePayload['families']; totalPages: number };
     return { families: json.families, totalPages: json.totalPages };
-  } catch (err) {
-    notFound();
+  } catch (parseErr) {
+    throw new Error('Invalid JSON in families response');
   }
 }
 
-export default async function Home({ searchParams }: { searchParams?: Promise<{ page?: string }> }) {
-  const sp = await searchParams;
-  const pageRaw = await sp?.page ?? DEFAULT_PAGE.toString();
+export default async function Home({ searchParams }: { searchParams?: { page?: string } }) {
+  const pageRaw = searchParams?.page ?? DEFAULT_PAGE.toString();
   const page = Number.parseInt(pageRaw, 10);
   if (Number.isNaN(page) || page < 1) notFound();
   
