@@ -12,10 +12,22 @@ export async function GET(req: Request) {
 
   try {
     const data = await loadFamiliesPage(page);
+
+    let totalFamilies = 0;
+    let totalPages = 3;
+    for (let i = 1; i <= 3; i++) {
+      try {
+        const mod = await import(`@/data/fontFamiliesPage${i}.json`);
+        totalFamilies += (mod.default?.families?.length ?? 0);
+      } catch (err) {
+      }
+    }
+
     return NextResponse.json({
-      ...data,
       page,
-      totalFamilies: data.totalFamilies ?? data.families.length
+      totalPages,
+      totalFamilies,
+      families: data.families
     });
   } catch (err: any) {
     if (err.message === 'page_out_of_range') {
