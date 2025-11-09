@@ -26,9 +26,9 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
   return (
     <nav className={styles.bar} aria-label="Pagination">
       {isPrevDisabled ? (
-        <span className={`${styles.btn} ${styles.disabled}`} aria-disabled="true" aria-label="Previous page (disabled)">Prev</span>
+        <span className={`${styles.btn} ${styles.disabled}`} aria-disabled="true" aria-label="Previous page (disabled)">←</span>
       ) : (
-        <Link className={styles.btn} href={hrefFor(prevPage)} aria-label={`Go to previous page, page ${prevPage}`} rel="prev">Prev</Link>
+        <Link className={styles.btn} href={hrefFor(prevPage)} aria-label={`Go to previous page, page ${prevPage}`} rel="prev">←</Link>
       )}
       {pageNumbers.map((pageNumber) => (
         <Link
@@ -43,9 +43,9 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
         </Link>
       ))}
       {isNextDisabled ? (
-        <span className={`${styles.btn} ${styles.disabled}`} aria-disabled="true" aria-label="Next page (disabled)">Next</span>
+        <span className={`${styles.btn} ${styles.disabled}`} aria-disabled="true" aria-label="Next page (disabled)">→</span>
       ) : (
-        <Link className={styles.btn} href={hrefFor(nextPage)} aria-label={`Go to next page, page ${nextPage}`} rel="next">Next</Link>
+        <Link className={styles.btn} href={hrefFor(nextPage)} aria-label={`Go to next page, page ${nextPage}`} rel="next">→</Link>
       )}
     </nav>
   );

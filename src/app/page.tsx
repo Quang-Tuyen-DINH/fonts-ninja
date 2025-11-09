@@ -43,9 +43,11 @@ export default async function Home({ searchParams }: { searchParams?: Promise<{ 
 
   return (
     <main>
-      <section className={styles.grid}>
-        <FontsList families={families} page={page} totalPages={totalPages} />
-      </section>
+      <div className={styles.cardsArea}>
+        <section className={styles.grid}>
+          <FontsList families={families} page={page} totalPages={totalPages} />
+        </section>
+      </div>
       <Pagination currentPage={page} totalPages={totalPages} />
     </main>
   );

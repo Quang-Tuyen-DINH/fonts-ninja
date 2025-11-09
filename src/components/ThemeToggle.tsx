@@ -38,8 +38,13 @@ export default function ThemeToggle({ initial }: ThemeToggleProps) {
   };
 
   return (
-    <button className={styles.toggle} onClick={toggle} aria-label="Switch theme">
-      {mode === 'light' ? 'Dark mode' : 'Light mode'}
+    <button
+      className={styles.toggle}
+      onClick={toggle}
+      aria-label="Switch theme"
+      aria-pressed={mode === 'dark'}
+    >
+      <span className={styles.label}>Switch theme</span>
     </button>
   );
 }

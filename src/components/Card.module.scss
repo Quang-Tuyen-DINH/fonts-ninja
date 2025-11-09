@@ -1,31 +1,40 @@
+/* Card container */
 .card {
-  background: var(--card-bg, #ffffff);
-  border: 1px solid var(--card-border, #e2e2e2);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  padding: 12px;
+  padding: 0 56px;
+  background: var(--card-bg);
+  border-radius: 32px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  gap: 10px;
-  transition: background .15s ease, border-color .15s ease;
-}
-
-.thumb {
-  border-radius: 12px;
+  gap: 32px;
+  width: 437px;
+  height: 314px;
+  box-sizing: border-box;
+  flex: 0 0 437px;
   overflow: hidden;
-  background: var(--thumb-bg, #f0f0f2);
-  aspect-ratio: 16 / 9;
+  color: var(--foreground);
 }
 
-.loading {
-  position: relative;
+/* Thumbnail area */
+.thumb {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  overflow: hidden;
+  width: 356px;
+  max-width: 100%;
+  height: 151px;
 }
 
+/* Lazy loading shimmer */
 @keyframes cardShimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
+.loading { position: relative; }
 .loading::after {
   content: '';
   position: absolute;
@@ -39,28 +48,38 @@
   animation: cardShimmer 1.2s linear infinite;
 }
 
-.meta {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  row-gap: 4px;
-  column-gap: 8px;
-  font-size: 12px;
-  color: var(--text-secondary, #4a4a4a);
+.thumb svg {
+  width: auto;
+  height: 100%;
+  display: block;
 }
 
-.name {
+/* Info layout */
+.lower {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   font-size: 14px;
-  font-weight: 700;
-  color: var(--text-primary, #121212);
-  margin: 0;
+  line-height: 16px;
+  color: currentColor;
 }
+
+.colLeft, .colRight {
+  display: flex;
+  flex-direction:
+  column;
+  gap: 5px;
+}
+.colLeft { width: 227px; }
+.colRight { width: 98px; text-align: right; }
+
+.name { font-size: 14px; font-weight: 700; color: currentColor; margin: 0; }
+.foundry { font-size: 14px; font-weight: 400; }
+.price { font-weight: 500; }
+.stylesCount { font-weight: 400; }
 
 @media (prefers-color-scheme: dark) {
-  .card {
-    --card-bg: #1c1c1e;
-    --card-border: #2e2e30;
-  }
-  .thumb { --thumb-bg: #262629; }
+  /* Keep shimmer adapted for dark but rely on global variables for colors */
   .loading::after {
     background: linear-gradient(90deg,
       rgba(255,255,255,0.06) 25%,
@@ -68,6 +87,4 @@
       rgba(255,255,255,0.06) 63%
     );
   }
-  .meta { --text-secondary: #a0a0a5; }
-  .name { --text-primary: #ffffff; }
 }

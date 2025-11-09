@@ -1,12 +1,29 @@
 .toggle {
-  background: #ff5b57;
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  background: var(--accent);
+  color: #ffffff;
   border: 0;
   cursor: pointer;
+  border-radius: 20px;
+  padding: 18px 24px;
+  height: 49px;
+  width: 150px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: background .15s ease;
 }
 
-.toggle:hover { background: #ff7773; }
+.label {
+  display: inline-block;
+  height: 12px;
+  font-size: 14px;
+  line-height: 12px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toggle:hover { background: #e74d50; }

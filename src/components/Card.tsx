@@ -9,7 +9,7 @@ import styles from './Card.module.scss';
 export type CardProps = { family: FontFamily };
 
 export function Card({ family }: CardProps) {
-  const priceText = family.price?.formatedPrice ?? 'N/A';
+  const priceText = family.price?.formatedPrice ? `From ${family.price?.formatedPrice}` : 'N/A';
   const thumbRef = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
   const [svgHtml, setSvgHtml] = useState<string | null>(null);
@@ -47,11 +47,15 @@ export function Card({ family }: CardProps) {
           data-svg-wrap
           dangerouslySetInnerHTML={inView && svgHtml ? { __html: svgHtml } : undefined}
         />
-        <h3 className={styles.name}>{family.name}</h3>
-        <div className={styles.meta}>
-          <span>{family.foundry.name}</span>
-          <span>{priceText}</span>
-          <span>{family.totalFonts} styles</span>
+        <div className={styles.lower}>
+          <div className={styles.colLeft}>
+            <h6 className={styles.name}>{family.name}</h6>
+            <h6 className={styles.foundry}>{family.foundry.name}</h6>
+          </div>
+          <div className={styles.colRight}>
+            <span className={styles.price}>{priceText}</span>
+            <span className={styles.stylesCount}>{family.totalFonts} styles</span>
+          </div>
         </div>
       </article>
     </Link>

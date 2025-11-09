@@ -15,7 +15,7 @@ export default function NotFound() {
 
   return (
     <main className={styles.wrap}>
-      <h1 className={styles.heading}>404 – Not Found</h1>
+      <h1 className={styles.heading}>404 - Not Found</h1>
       <p className={styles.notice}>The page you requested does not exist or the page number was out of range. Redirecting…</p>
     </main>
   );

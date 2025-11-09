@@ -1,35 +1,42 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f6f6;
+  --foreground: #000000;
   --card-bg: #ffffff;
   --card-border: #e2e2e2;
   --thumb-bg: #f0f0f2;
+  --accent: #ee585a;
+  --muted: #8e8e93;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --card-bg: #1c1c1e;
+    /* Dark theme fallbacks when no explicit data-theme is set */
+    --background: #181818;
+    --foreground: #ffffff;
+    --card-bg: #2c2c2e;
     --card-border: #2e2e30;
     --thumb-bg: #262629;
   }
 }
 
 :root[data-theme='light'] {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f6f6;
+  --foreground: #000000;
   --card-bg: #ffffff;
   --card-border: #e2e2e2;
   --thumb-bg: #f0f0f2;
+  --accent: #ee585a;
+  --muted: #8e8e93;
 }
 
 :root[data-theme='dark'] {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --card-bg: #1c1c1e;
+  --background: #181818;
+  --foreground: #ffffff;
+  --card-bg: #2c2c2e;
   --card-border: #2e2e30;
   --thumb-bg: #262629;
+  --accent: #ee585a;
+  --muted: #8e8e93;
 }
 
 html,
@@ -57,7 +64,6 @@ a {
   text-decoration: none;
 }
 
-/* Allow theme-aware SVG color via currentColor */
 [data-svg-wrap] {
   color: var(--foreground);
 }
@@ -66,4 +72,10 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.container {
+  width: 100%;
+  max-width: 1328px;
+  margin: 0 auto;
 }

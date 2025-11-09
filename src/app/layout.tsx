@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { cookies } from "next/headers";
 import "./globals.css";
-import ThemeToggle from "@/components/ThemeToggle";
 import { coerceMode, THEME_COOKIE } from "@/lib/theme";
+import { NavBar } from "@/components/NavBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,11 +31,10 @@ export default async function RootLayout({
   return (
     <html lang="en" data-theme={mode}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <header style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'12px 20px'}}>
-          <a href="/" aria-label="Home" style={{textDecoration:'none',color:'inherit',fontWeight:600}}>Fonts App</a>
-          <ThemeToggle initial={mode} />
-        </header>
-        {children}
+        <NavBar themeInitial={mode} />
+        <div className="container">
+          {children}
+        </div>
       </body>
     </html>
   );
