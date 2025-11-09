@@ -1,0 +1,90 @@
+/* Card container */
+.card {
+  padding: 0 56px;
+  background: var(--card-bg);
+  border-radius: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 32px;
+  width: 437px;
+  height: 314px;
+  box-sizing: border-box;
+  flex: 0 0 437px;
+  overflow: hidden;
+  color: var(--foreground);
+}
+
+/* Thumbnail area */
+.thumb {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  overflow: hidden;
+  width: 356px;
+  max-width: 100%;
+  height: 151px;
+}
+
+/* Lazy loading shimmer */
+@keyframes cardShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.loading { position: relative; }
+.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0.06) 25%,
+    rgba(0,0,0,0.12) 37%,
+    rgba(0,0,0,0.06) 63%
+  );
+  background-size: 200% 100%;
+  animation: cardShimmer 1.2s linear infinite;
+}
+
+.thumb svg {
+  width: auto;
+  height: 100%;
+  display: block;
+}
+
+/* Info layout */
+.lower {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 16px;
+  color: currentColor;
+}
+
+.colLeft, .colRight {
+  display: flex;
+  flex-direction:
+  column;
+  gap: 5px;
+}
+.colLeft { width: 227px; }
+.colRight { width: 98px; text-align: right; }
+
+.name { font-size: 14px; font-weight: 700; color: currentColor; margin: 0; }
+.foundry { font-size: 14px; font-weight: 400; }
+.price { font-weight: 500; }
+.stylesCount { font-weight: 400; }
+
+@media (prefers-color-scheme: dark) {
+  /* Keep shimmer adapted for dark but rely on global variables for colors */
+  .loading::after {
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0.06) 25%,
+      rgba(255,255,255,0.12) 37%,
+      rgba(255,255,255,0.06) 63%
+    );
+  }
+}

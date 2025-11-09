@@ -1,0 +1,13 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 437px);
+  gap: 8px;
+  padding: 24px 0 0;
+  justify-content: center;
+}
+
+.cardsArea {
+  width: 1328px;
+  margin: 0 auto;
+  padding: 0;
+}

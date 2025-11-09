@@ -1,0 +1,57 @@
+.card {
+  background: var(--card-bg, #ffffff);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thumb,
+.title,
+.row {
+  border-radius: 8px;
+}
+
+.thumb {
+  height: 0;
+  padding-bottom: calc(9 / 16 * 100%);
+  background: var(--thumb-bg, #f0f0f2);
+}
+
+.title { height: 16px; width: 60%; }
+.row { height: 12px; }
+
+.rowWrap {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0.06) 25%,
+    rgba(0,0,0,0.12) 37%,
+    rgba(0,0,0,0.06) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card { --card-bg: #1c1c1e; --card-border: #2e2e30; }
+  .thumb { --thumb-bg: #262629; }
+  .shimmer {
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0.06) 25%,
+      rgba(255,255,255,0.12) 37%,
+      rgba(255,255,255,0.06) 63%
+    );
+  }
+}

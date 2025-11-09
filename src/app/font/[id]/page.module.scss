@@ -1,0 +1,80 @@
+.wrap {
+  padding: 24px 0 48px;
+}
+
+.grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.preview {
+  height: 592px;
+  width: 883px;
+  display: flex;
+  flex-direction:column;
+  gap: 16px;
+}
+
+.previewCard {
+  height: inherit;
+  background: var(--card-bg);
+  border-radius: 32px;
+  color: var(--foreground);
+  padding: 40px 0 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.svgHolder {
+  height: 348px;
+  width: 829px;
+  border-radius: 16px;
+}
+
+.svgHolder svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.switchRow {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+.switchBtn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--foreground);
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.switchBtn[disabled] {
+  opacity: .5;
+  cursor: not-allowed;
+}
+.switchBtnActive {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.side {
+  width: 437px;
+  padding: 40px 0 40px 40px;
+  background: var(--card-bg);
+  border-radius: 32px;
+}
+.sideTitle {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+.sidePara {
+  font-size: 14px;
+  color: var(--foreground);
+  margin-top: 8px;
+}
