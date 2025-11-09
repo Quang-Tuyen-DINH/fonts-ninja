@@ -1,0 +1,73 @@
+.card {
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--card-border, #e2e2e2);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background .15s ease, border-color .15s ease;
+}
+
+.thumb {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--thumb-bg, #f0f0f2);
+  aspect-ratio: 16 / 9;
+}
+
+.loading {
+  position: relative;
+}
+
+@keyframes cardShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0.06) 25%,
+    rgba(0,0,0,0.12) 37%,
+    rgba(0,0,0,0.06) 63%
+  );
+  background-size: 200% 100%;
+  animation: cardShimmer 1.2s linear infinite;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: 4px;
+  column-gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary, #4a4a4a);
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary, #121212);
+  margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    --card-bg: #1c1c1e;
+    --card-border: #2e2e30;
+  }
+  .thumb { --thumb-bg: #262629; }
+  .loading::after {
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0.06) 25%,
+      rgba(255,255,255,0.12) 37%,
+      rgba(255,255,255,0.06) 63%
+    );
+  }
+  .meta { --text-secondary: #a0a0a5; }
+  .name { --text-primary: #ffffff; }
+}
