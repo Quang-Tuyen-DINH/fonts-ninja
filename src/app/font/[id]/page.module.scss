@@ -1,0 +1,51 @@
+.wrap { padding: 24px 0 48px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+}
+
+.preview { display: flex; flex-direction: column; gap: 16px; }
+
+.previewCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 24px;
+  color: var(--foreground);
+}
+
+.svgHolder { border-radius: 16px; overflow: hidden; }
+.svgHolder svg { display: block; width: 100%; height: auto; }
+
+.switchRow { display: flex; gap: 16px; margin-top: 12px; }
+.switchBtn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.switchBtn[disabled] { opacity: .5; cursor: not-allowed; }
+.switchBtnActive { color: var(--accent); font-weight: 600; }
+
+.svgBox {
+  border-radius: 16px;
+  background: var(--card-bg);
+  padding: 16px;
+  color: var(--foreground);
+  border: 1px solid var(--card-border);
+}
+
+.svgBox svg { display: block; width: 100%; height: auto; }
+
+.side { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 24px; }
+.sideTitle { font-size: 20px; line-height: 24px; font-weight: 700; color: var(--foreground); }
+.sidePara { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+}
