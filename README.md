@@ -77,27 +77,41 @@ root/
 
 ## Data & API Layer
 
-Mock JSON files provide deterministic font family data across three pages plus an optional single details record. A cached index flattens pages for O(1) lookup by id.
+Mock JSON files live under `src/data`. The app exposes two API routes and fetches them server-side from pages:
 
-Key functions in `src/lib/data.ts`:
-* `loadFamiliesPage(page)` – loads a single paginated JSON file.
-* `getFamilyById(id)` – cached map lookup across all pages + single details file.
+- `GET /api/families?page={n}` → returns families for a given page JSON (as provided by the test data).
+- `GET /api/familyDetails` → returns a single family record from `fontDetails.json`.
 
-Route handlers in `src/app/api/families/route.ts`:
-* `listFamilies` – returns current page, totalPages, families, totalFamilies.
-* `getFamily` – returns a single family by query param `id`.
+Server pages call these endpoints using an absolute base URL built via a small helper in `src/lib/url.ts`:
+
+```ts
+// src/lib/url.ts
+import { headers } from 'next/headers';
+export async function getBaseUrl() {
+	const h = await headers();
+	const host = h.get('host');
+	const proto = h.get('x-forwarded-proto') ?? 'http';
+	return host ? `${proto}://${host}` : (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+}
+```
 
 ## Usage Guide
 
 ### Catalogue (Home Page)
-Landing page lists font families for page 1; pagination allows navigating pages 1–3. Cards lazy-load their SVG preview and inherit color from theme.
+The home page fetches `GET /api/families?page={n}` on the server and renders a paginated grid (max 24 per page as per provided JSON). Cards lazy-load their SVG preview and inherit color from the current theme.
 
 ### Font Details
-`/font/[id]` displays a chosen family with two preview modes: Pangram and Alphabet. The client-side `PreviewSwitcher` preserves accessibility state (`aria-selected`). Metadata is generated server-side from the same data loader for consistency.
+`/font/[id]` fetches `GET /api/familyDetails` on the server and displays two preview modes: Pangram (default when available) and Alphabet. The client `PreviewSwitcher` preserves accessibility state (`aria-selected`). Metadata is generated server-side from the same API for consistency.
 
 ## Theming
 
 Light/Dark mode is driven by `data-theme` on `<html>` and a cookie (`fonts_app_theme`). Variables (background, foreground, accent, muted) reside in `globals.css`. The `ThemeToggle` client component updates cookie + DOM without layout shift.
+
+## Technical Choices (short)
+
+- Server-side fetch from internal API routes (instead of importing JSON directly in pages) to mirror real-world boundaries and satisfy the test requirement.
+- SCSS Modules + CSS variables for a simple, deterministic light/dark system with `currentColor`-based SVG tinting.
+- Minimal helpers (`getBaseUrl`) to build absolute URLs reliably in server components.
 
 ## Author
 
