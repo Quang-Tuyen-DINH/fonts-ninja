@@ -61,19 +61,6 @@
   font-weight: 600;
 }
 
-.svgBox {
-  border-radius: 16px;
-  background: var(--card-bg);
-  padding: 16px;
-  color: var(--foreground);
-}
-
-.svgBox svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 .side {
   width: 437px;
   padding: 40px 0 40px 40px;
@@ -90,8 +77,4 @@
   font-size: 14px;
   color: var(--foreground);
   margin-top: 8px;
-}
-
-@media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr; }
 }
