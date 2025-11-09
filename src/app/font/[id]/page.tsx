@@ -27,7 +27,6 @@ async function fetchFontDetails(id: string): Promise<FontFamily> {
 export default async function FontDetailsPage({ params }: PageProps) {
   const p = await params;
   const familyId = p.id;
-  console.log("HERE ", familyId)
   const family = await fetchFontDetails(familyId);
 
   const alphabetSvg = toCurrentColor(family.images.alphabet.svg);
@@ -45,8 +44,8 @@ export default async function FontDetailsPage({ params }: PageProps) {
             />
           </div>
           <aside className={styles.side} aria-label="Family info">
-            <h2 className={styles.sideTitle}>{family.name}</h2>
-            <p className={styles.sidePara}>From {family.foundry.name}. Contains {family.totalFonts} styles.</p>
+            <h2 className={styles.sideTitle}>{family.foundry.name}</h2>
+            <p className={styles.sidePara}>From {family.name}</p>
           </aside>
         </div>
       </div>

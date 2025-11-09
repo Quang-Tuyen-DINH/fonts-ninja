@@ -12,7 +12,6 @@ export type PreviewSwitcherProps = {
 export default function PreviewSwitcher({ familyName, alphabetSvg, pangramSvg }: PreviewSwitcherProps) {
   const hasPangram = !!(pangramSvg && pangramSvg.trim().length > 0);
   const [mode, setMode] = React.useState<'pangram' | 'alphabet'>(hasPangram ? 'pangram' : 'alphabet');
-  // Sync mode after mount in case pangram only exists client-side or hydration differs
   React.useEffect(() => {
     if (hasPangram) setMode('pangram');
   }, [hasPangram]);
