@@ -8,14 +8,21 @@ export function Logo() {
       href="/"
       aria-label="Fonts App Home"
       style={{
-        fontWeight: 700,
-        fontSize: '16px',
-        letterSpacing: '.5px',
         display: 'inline-flex',
         alignItems: 'center'
       }}
     >
-      <span>Fonts App</span>
+      <span
+        aria-hidden="true"
+        style={{
+          width: 24,
+          height: 24,
+          display: 'inline-block',
+          backgroundColor: 'currentColor',
+          WebkitMask: 'url(/logo.svg) no-repeat center / contain',
+          mask: 'url(/logo.svg) no-repeat center / contain',
+        }}
+      />
     </Link>
   );
 }
